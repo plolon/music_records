@@ -1,21 +1,21 @@
-exports.getArtistsByGenre = (req, res, next) => {
-  const genreId = req.params.genreid;
-  res.send([
-    { id: genreId },
-    { id: 1, name: 'artist1' },
-    { id: 2, name: 'artist2' },
-  ]);
-  // TODO sql get artists by genreId,
-  // nesting way: artists->albums->tracks->genres
-  // cte
+exports.getAll = (req, res, next) => {
+  let query = createGetQuery(req);
+  res.send(query);
 };
-exports.getArtistsWithTrackCount = (req, res, next) => {
-    const genreId = req.params.genreid;
-    res.send([
-      { id: 1, name: 'artist1', count: 3 },
-      { id: 2, name: 'artist2', count: 10 },
-    ]);
-    // TODO sql get artists with count tracks
-    // nesting way: artists + albums + tracks=>count
-    // cte
+exports.getById = (req, res, next) => {
+    let query = createGetQuery(req, req.params.id);
+    res.send(query);
   };
+
+function createGetQuery(req, id) {
+  let select = req.query.select;
+  if (!select) select = '*';
+  let table = req.params.table;
+  let orderBy = req.query.orderby
+  if (!orderBy) orderBy = '';
+  else orderBy = 'ORDER BY ' + orderBy;
+  if(!id)
+  return `SELECT ${select} FROM ${table} ${orderBy}`;
+  else
+  return `SELECT ${select} FROM ${table} WHERE ${table.slice(0, -1)}id=${id} ${orderBy}`;
+}
