@@ -1,0 +1,19 @@
+{
+  "name": "music_records",
+  "version": "1.0.0",
+  "description": "interview_task",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plolon/music_records.git"
+  },
+  "author": "Dawid Bańczak",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/plolon/music_records/issues"
+  },
+  "homepage": "https://github.com/plolon/music_records#readme"
+}
