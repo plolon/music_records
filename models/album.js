@@ -2,10 +2,10 @@ const { Sequelize } = require('sequelize');
 
 const sequelize = require('../util/database');
 
-const Genre = sequelize.define(
-  'genre',
+const Album = sequelize.define(
+  'album',
   {
-    GenreId: {
+    AlbumId: {
       type: Sequelize.INTEGER,
       autoIncrement: true,
       allowNull: false,
@@ -16,4 +16,4 @@ const Genre = sequelize.define(
   { timestamps: false }
 );
 
-module.exports = Genre;
+module.exports = Album;

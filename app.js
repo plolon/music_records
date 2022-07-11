@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const sequelize = require('./util/database');
-const Album = require('./models/albums');
+const Album = require('./models/album');
 const Artist = require('./models/artist');
 const Genre = require('./models/genre');
 const Track = require('./models/track');
@@ -16,12 +16,12 @@ app.use((req, res, next) => {
     res.status(404).send('Not found');
 });
 
-Artist.hasMany(Album);
-Album.hasOne(Artist, {foreignKey: "ArtistId"})
-Track.hasOne(Album, {foreignKey: "AlbumId"})
-Album.hasMany(Track);
-Track.hasOne(Genre, {foreignKey: "GenreId"})
-Genre.hasMany(Track);
+Artist.hasMany(Album, {foreignKey: "ArtistId"});
+Album.belongsTo(Artist)
+Track.belongsTo(Album)
+Album.hasMany(Track, {foreignKey: "AlbumId"});
+Track.belongsTo(Genre)
+Genre.hasMany(Track, {foreignKey: "GenreId"});
 
 sequelize.sync()
 .then(result => {
